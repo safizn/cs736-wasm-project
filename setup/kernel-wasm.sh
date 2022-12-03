@@ -15,8 +15,12 @@ sudo wasmer run --backend singlepass --loader kernel ./test/rootfs/data/hello_wo
 
 # https://medium.com/wasmer/running-webassembly-on-the-kernel-8e04761f1d8e
 # Install dependencies: git wget curl tar make gcc
-git clone https://github.com/wasmerio/kernel-wasm
+git clone https://github.com/safizn/kernel-wasm-fork
 pacman -Q | grep headers
 sudo pacman -S linux-headers
 pacman -Q | grep headers
-make install
+make
+sudo insmod kernel-wasm.ko
+sudo insmod kwasm-networking.ko
+sudo insmod kwasm-wasi.ko
+# `make clean` removes installed module
